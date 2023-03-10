@@ -13,8 +13,9 @@ for (i = 1;i< 4;i++){
     encrypted_key = crypto.publicEncrypt(crypto.createPublicKey(pub), aes_key)
     //decrypted = crypto.privateDecrypt(crypto.createPrivateKey(sec), encrypted_key)
     //console.log(`${i} decrypted key:\t`, decrypted)
-    out[pub.toString()] = encrypted_key.toString()
+    //console.log(encrypted_key)
+    out[pub.toString()] = encrypted_key
     //console.log(encrypted_key.toString())
 }
-
+//console.log(out)
 fs.writeFileSync("./io.txt", JSON.stringify(out, null, 2))
