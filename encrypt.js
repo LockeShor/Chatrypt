@@ -8,8 +8,9 @@ console.log("unencrypted key:\t", aes_key)
 
 out = {}
 message = "123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZqwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"
-// ^^ Truncates to multiple of 16 bytes, fix by adding 16 extra bytes to add to a multiple of 16???
+//BUG ^^ Truncates to multiple of 16 bytes, fix by adding 16 extra bytes to add to a multiple of 16???
 const cipher = crypto.createCipheriv("aes-256-cbc", aes_key, IV)
+//TODO: encrypt IV?
 out["IV"] = IV
 out["message"] = cipher.update(message, "utf-8", "hex")
 
