@@ -1,11 +1,17 @@
 const fs = require('fs')
 const crypto = require('node:crypto')
 
+IV = crypto.randomBytes(16)
 aes_key = crypto.randomBytes(32)
 
 console.log("unencrypted key:\t", aes_key)
 
 out = {}
+message = "123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZqwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"
+// ^^ Truncates to multiple of 16 bytes, fix by adding 16 extra bytes to add to a multiple of 16???
+const cipher = crypto.createCipheriv("aes-256-cbc", aes_key, IV)
+out["IV"] = IV
+out["message"] = cipher.update(message, "utf-8", "hex")
 
 for (i = 1;i< 4;i++){
     pub = fs.readFileSync(`./test_data/RSApub${i}.txt`)
